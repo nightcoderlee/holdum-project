@@ -1,48 +1,34 @@
 import './App.css';
-import Customer from './components/Customer';
-
-const customers = [
-{
-  'id' : 1,
-  'name': '닉네임1',
-  'todaymoney': '총이용금액 100,000KRW',
-  'allmoney': '오늘 이용 금액 200,000KRW',
-  'nowmoney': '현재 바이인 금액 50,000KRW'
-},
-{
-  'id' : 2,
-  'name': '닉네임2',
-  'todaymoney': '총이용금액 1,000,000KRW',
-  'allmoney': '오늘 이용 금액 200,000KRW',
-  'nowmoney': '현재 바이인 금액 50,000KRW'
-},
-{
-  'id' : 3,
-  'name': '닉네임3',
-  'todaymoney': '총이용금액 200,000KRW',
-  'allmoney': '오늘 이용 금액 200,000KRW',
-  'nowmoney': '현재 바이인 금액 30,000KRW'
-}
-]
+import Button from '@mui/material/Button';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import TablePage from './TablePage';
+import CustomerPage from './CustomerPage';
 
 function App() {
   return (
-    <div>
-{
-  customers.map(c => {
-    return (
-      <Customer
-      key={c.id}
-      id={c. id}
-      name={c. name}
-      todaymoney={c. todaymoney}
-      allmoney={c. allmoney}
-      nowmoney={c. nowmoney}
-      />
-    )
-  })
-}
-    </div>
+    <BrowserRouter>
+      <div>
+        <header className="black-nav">
+          <Link to="/">
+            <h4>고객 관리 시스템</h4>
+          </Link>
+        </header>
+        <Routes>
+          <Route path="/" element={<div className="App">
+            <Button variant="outlined" component={Link} to="/table">
+              테이블
+            </Button>
+            <Button variant="outlined" component={Link} to="/customer">
+              고객관리
+            </Button>
+            <Button variant="outlined">승점</Button>
+            <Button variant="outlined">비고</Button>
+          </div>} />
+          <Route path="/table" element={<TablePage />} />
+          <Route path="/customer" element={<CustomerPage />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 
